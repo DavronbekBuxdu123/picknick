@@ -18,7 +18,7 @@ interface CartItem {
 
 interface ProductStore {
   products: Product[];
-  categories: any[];
+  categories: [];
   DetailsId: string;
   carts: CartItem[];
   search: string;

@@ -8,7 +8,7 @@ import Image from "next/image";
 const ProductDetailClient = () => {
   const { id } = useParams();
 
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
