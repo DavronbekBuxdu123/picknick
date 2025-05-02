@@ -1,7 +1,12 @@
-// components/Modal.js
-import React from "react";
+import React, { ReactNode } from "react";
 
-export default function Modal({ show, onClose, children }) {
+interface ModalProps {
+  show: boolean;
+  onClose: () => void;
+  children: ReactNode;
+}
+
+export default function Modal({ show, onClose, children }: ModalProps) {
   if (!show) return null;
 
   return (
