@@ -15,10 +15,15 @@ interface CartItem {
   product: Product;
   quantity: number;
 }
+interface Category {
+  id: number;
+  name: string;
+  image_src: string;
+}
 
 interface ProductStore {
   products: Product[];
-  categories: [];
+  categories: Category[];
   DetailsId: string;
   carts: CartItem[];
   search: string;
