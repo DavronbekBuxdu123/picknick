@@ -41,8 +41,8 @@ interface ProductStore {
 const useProductStore = create<ProductStore>()(
   persist(
     (set) => ({
-      products: [],
-      categories: [],
+      products: [] as Product[],
+      categories: [] as Category[],
       DetailsId: "",
       carts: [],
       search: "",
