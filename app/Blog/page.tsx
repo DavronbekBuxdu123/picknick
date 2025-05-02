@@ -1,13 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
-import useProductStore from "../store/useProductStore";
+import React from "react";
+
 import Image from "next/image";
 
 export default function Blog() {
-  const { product, fetchProducts } = useProductStore();
-  useEffect(() => {
-    fetchProducts();
-  }, []);
   return (
     <div className="max-w-[1540px] mx-auto">
       <div className="max-w-[900px] p-10 mx-auto">

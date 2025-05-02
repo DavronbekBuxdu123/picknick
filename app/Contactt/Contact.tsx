@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 
 export default function Contact() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleSubmit = () => {
     toast.success("Tez orada siz bilan bog'lanamiz");
   };
@@ -24,8 +23,8 @@ export default function Contact() {
             Keling, biz bilan gaplashaylik
           </p>
           <p className="lg:text-left text-[12px] lg:text-[16px] text-left  ">
-            Savollar, sharhlar yoki takliflar? Shaklni to'ldiring va biz tez
-            orada bog'lanamiz.
+            Savollar, sharhlar yoki takliflar? Shaklni to`ldiring va biz tez
+            orada bog`lanamiz.
           </p>
         </div>
         <div className="flex flex-col gap-y-3 px-2">

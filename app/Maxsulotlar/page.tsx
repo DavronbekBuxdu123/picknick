@@ -4,22 +4,8 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import useProductStore from "../store/useProductStore";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { usePathname, useRouter } from "next/navigation";
+
 import Link from "next/link";
-
-// interface Category {
-//   id: number;
-//   name: string;
-//   image_src: string;
-// }
-
-// interface Product {
-//   id: number;
-//   title: string;
-//   image_src: string;
-//   category_id: number;
-//   price: number;
-// }
 
 export default function Maxsulotlar() {
   const {
@@ -28,7 +14,6 @@ export default function Maxsulotlar() {
     categories,
     fetchCategories,
     addToCart,
-    carts,
     search,
   } = useProductStore();
 
@@ -41,9 +26,6 @@ export default function Maxsulotlar() {
   useEffect(() => {
     fetchCategories();
   }, []);
-
-  const router = useRouter();
-  const pathname = usePathname();
 
   const filteredProducts = products.filter((pro) => {
     const matchesCategory = kategoriya ? pro.category_id === kategoriya : true;
@@ -69,7 +51,6 @@ export default function Maxsulotlar() {
         </p>
       </div>
 
-      {/* CATEGORY SCROLLER */}
       <div className="flex items-center px-8 lg:px-0 gap-x-3 overflow-x-scroll scroll-hidden">
         {categories.map((cat) => (
           <div

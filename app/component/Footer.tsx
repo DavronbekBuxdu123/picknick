@@ -51,7 +51,7 @@ export default function Footer() {
             className="text-[16px]   font-normal flex flex-col gap-y-[20px]"
           >
             <li className="text-white">YORDAM</li>
-            <li>Mijozlarni qo'llab quvvatlash</li>
+            <li>Mijozlarni qo`llab quvvatlash</li>
             <li>Yetkazib berish tafsilotlari</li>
             <li>Shartlar va qoidalar</li>
             <li>Maxfiylik siyosati</li>
@@ -66,7 +66,7 @@ export default function Footer() {
             <li>Hisob</li>
             <li>Yetkazib berishni boshqarish</li>
             <li>Buyurtmalar</li>
-            <li>To'lovlar</li>
+            <li>To`lovlar</li>
           </ul>
         </div>
         <div>
@@ -76,7 +76,7 @@ export default function Footer() {
           >
             <li className="text-white">RESURSLAR</li>
             <li>Bepul e-kitoblar</li>
-            <li>Dasturlash bo'yicha qo'llanmalar</li>
+            <li>Dasturlash bo`yicha qo`llanmalar</li>
             <li>Qanday foydalanish - Blog</li>
             <li>You Tube pleylist</li>
           </ul>

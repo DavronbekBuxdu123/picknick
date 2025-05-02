@@ -10,7 +10,7 @@ export default function Main() {
             style={{ lineHeight: "50px", color: "rgba(0, 0, 0, 1)" }}
             className="font-bold text-[28px] sm:text-[32px]  lg:text-[40px]"
           >
-            Zo'r jihozlar bilan sarguzashtlarni kashf eting
+            Zo`r jihozlar bilan sarguzashtlarni kashf eting
           </p>
         </div>
 
