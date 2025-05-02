@@ -27,7 +27,6 @@ interface ProductStore {
   DetailsId: string;
   carts: CartItem[];
   search: string;
-
   setSearch: (text: string) => void;
   addToCart: (item: Product) => void;
   removeFromCart: (id: number) => void;
