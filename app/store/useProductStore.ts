@@ -27,7 +27,7 @@ interface ProductStore {
   addToCart: (item: Product) => void;
   removeFromCart: (id: number) => void;
   handleQuantity: (type: "PLUS" | "MINUS", id: number) => void;
-
+  clearCart: () => void;
   setDetailsId: (id: string) => void;
   fetchProducts: () => Promise<void>;
   fetchCategories: () => Promise<void>;
@@ -107,7 +107,7 @@ const useProductStore = create<ProductStore>()(
       },
     }),
     {
-      name: "product-storage", // localStorage key
+      name: "product-storage",
     }
   )
 );
