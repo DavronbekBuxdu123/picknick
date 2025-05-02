@@ -46,7 +46,7 @@ const ProductDetailClient = () => {
         <div className="flex flex-col lg:flex-row gap-4">
           {product.product_images?.length > 0 && (
             <div className="flex lg:flex-col gap-2 max-h-[500px] overflow-y-auto scroll-hidden pr-2">
-              {product.product_images.map((img: any, i: number) => {
+              {product.product_images.map((img, i: number) => {
                 const imageUrl = `https://api.piknicuz.com/api/uploads/images/${img.images_src}`;
                 const isSelected = selectedImage === imageUrl;
 
