@@ -1,9 +1,26 @@
 "use client";
+
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import useProductStore from "../store/useProductStore";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import Link from "next/link";
+
+export interface Category {
+  id: number;
+  name: string;
+  image_src: string;
+}
+
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image_src: string;
+  description: string;
+  category_id: number;
+  category?: Category;
+}
 
 export default function Categories() {
   const {
@@ -14,7 +31,7 @@ export default function Categories() {
     addToCart,
     search,
   } = useProductStore();
-  const [kategoriya, setKategoriya] = useState(null);
+  const [kategoriya, setKategoriya] = useState<number | null>(null);
 
   useEffect(() => {
     fetchProducts();
@@ -23,11 +40,11 @@ export default function Categories() {
   useEffect(() => {
     fetchCategories();
   }, [fetchCategories]);
-  console.log(search);
 
   const [open, setOpen] = useState(true);
 
   const filteredProducts = products.filter((pro) => {
+    // Product type qo'shildi
     const matchesCategory = kategoriya ? pro.category_id === kategoriya : true;
     const matchesSearch = search
       ? pro.title.toLowerCase().includes(search.toLowerCase())
@@ -35,13 +52,15 @@ export default function Categories() {
 
     return matchesCategory && matchesSearch;
   });
-  const Davron = (id) => {
+
+  const Davron = (id: number) => {
     if (id === kategoriya) {
       setKategoriya(null);
     } else {
       setKategoriya(id);
     }
   };
+
   return (
     <div className="max-w-[1440px] mx-auto pt-20">
       <div className="flex items-center justify-center">
@@ -51,7 +70,7 @@ export default function Categories() {
       </div>
 
       <div className="flex items-center px-8 lg:px-0 gap-x-3 overflow-x-scroll scroll-hidden">
-        {categories.map((cat) => (
+        {categories.map((cat: Category) => (
           <div
             key={cat.id}
             onClick={() => Davron(cat.id)}
@@ -89,7 +108,7 @@ export default function Categories() {
                   style={{ backgroundColor: "#e8f8ed" }}
                   width={300}
                   height={300}
-                  alt=""
+                  alt={pro.title}
                   src={`https://api.piknicuz.com/api/uploads/images/${pro.image_src}`}
                 />
               </div>

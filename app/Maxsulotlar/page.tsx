@@ -4,8 +4,21 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import useProductStore from "../store/useProductStore";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
-
 import Link from "next/link";
+
+interface Category {
+  id: number;
+  name: string;
+  image_src: string;
+}
+
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image_src: string;
+  category_id: number;
+}
 
 export default function Maxsulotlar() {
   const {
@@ -27,7 +40,7 @@ export default function Maxsulotlar() {
     fetchCategories();
   }, [fetchCategories]);
 
-  const filteredProducts = products.filter((pro) => {
+  const filteredProducts = products.filter((pro: Product) => {
     const matchesCategory = kategoriya ? pro.category_id === kategoriya : true;
     const matchesSearch = search
       ? pro.title.toLowerCase().includes(search.toLowerCase())
@@ -35,12 +48,9 @@ export default function Maxsulotlar() {
 
     return matchesCategory && matchesSearch;
   });
+
   const Davron = (id: number): void => {
-    if (id === kategoriya) {
-      setKategoriya(null);
-    } else {
-      setKategoriya(id);
-    }
+    setKategoriya((prev) => (prev === id ? null : id));
   };
 
   return (
@@ -52,7 +62,7 @@ export default function Maxsulotlar() {
       </div>
 
       <div className="flex items-center px-8 lg:px-0 gap-x-3 overflow-x-scroll scroll-hidden">
-        {categories.map((cat) => (
+        {categories.map((cat: Category) => (
           <div
             key={cat.id}
             onClick={() => Davron(cat.id)}
@@ -64,7 +74,7 @@ export default function Maxsulotlar() {
               className="lg:w-[70px] lg:h-[70px]"
               width={70}
               height={70}
-              alt="photo"
+              alt={cat.name}
               src={`https://api.piknicuz.com/api/uploads/images/${cat.image_src}`}
             />
             <p>{cat.name}</p>
@@ -72,11 +82,8 @@ export default function Maxsulotlar() {
         ))}
       </div>
 
-      <div
-        className={`max-w-[1540px] mx-auto transition-all duration-700 px-12 lg:px-0 ease-in-out gap-y-10 
-        grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2`}
-      >
-        {filteredProducts.map((pro) => (
+      <div className="max-w-[1540px] mx-auto transition-all duration-700 px-12 lg:px-0 ease-in-out gap-y-10 grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2">
+        {filteredProducts.map((pro: Product) => (
           <div
             className="border rounded-[20px] mt-4 p-3 w-[300px] h-[450px]"
             key={pro.id}

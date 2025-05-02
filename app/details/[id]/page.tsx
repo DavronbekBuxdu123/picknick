@@ -1,167 +1,137 @@
 "use client";
-
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import useProductStore from "@/app/store/useProductStore";
 import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
+import Link from "next/link";
+import useProductStore from "@/app/store/useProductStore";
+export interface Category {
+  id: number;
+  name: string;
+  image_src: string;
+}
 
-const ProductDetailClient = () => {
-  const { id } = useParams();
+export interface ProductImage {
+  images_src: string;
+}
 
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [quantity, setQuantity] = useState<number>(1);
-  const { products, fetchProducts, addToCart } = useProductStore();
+export interface CategoryOfProduct {
+  id: number;
+  name: string;
+}
+
+export interface Product {
+  id: number;
+  title: string;
+  price: number;
+  image_src: string;
+  video_src?: string;
+  description: string;
+  category_id: number;
+  category?: CategoryOfProduct;
+  product_images?: ProductImage[];
+}
+
+export default function Maxsulotlar() {
+  const {
+    products,
+    fetchProducts,
+    categories,
+    fetchCategories,
+    addToCart,
+    search,
+  } = useProductStore();
+
+  const [kategoriya, setKategoriya] = useState<number | null>(null);
 
   useEffect(() => {
-    const loadProduct = async () => {
-      if (products.length === 0) {
-        await fetchProducts();
-      }
-    };
-    loadProduct();
-  }, [fetchProducts, products.length]);
+    fetchProducts();
+  }, [fetchProducts]);
 
   useEffect(() => {
-    if (products.length > 0 && id) {
-      const foundProduct = products.find((item) => item.id === id);
-      setProduct(foundProduct);
-      setLoading(false);
-    }
-  }, [id, products]);
+    fetchCategories();
+  }, [fetchCategories]);
 
-  const handleIncrement = () => setQuantity((prev) => prev + 1);
-  const handleDecrement = () => {
-    if (quantity > 1) setQuantity((prev) => prev - 1);
+  const filteredProducts = products.filter((pro) => {
+    const matchesCategory = kategoriya ? pro.category_id === kategoriya : true;
+    const matchesSearch = search
+      ? pro.title.toLowerCase().includes(search.toLowerCase())
+      : true;
+    return matchesCategory && matchesSearch;
+  });
+
+  const Davron = (id: number): void => {
+    setKategoriya((prev) => (prev === id ? null : id));
   };
 
-  if (loading) return <div className="p-4 text-center">Yuklanmoqda...</div>;
-  if (!product)
-    return <div className="p-4 text-center">Mahsulot topilmadi...</div>;
-
   return (
-    <div className="p-3 max-w-7xl mx-auto h-auto pb-20">
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="flex flex-col lg:flex-row gap-4">
-          {product.product_images?.length > 0 && (
-            <div className="flex lg:flex-col gap-2 max-h-[500px] overflow-y-auto scroll-hidden pr-2">
-              {product.product_images.map((img, i: number) => {
-                const imageUrl = `https://api.piknicuz.com/api/uploads/images/${img.images_src}`;
-                const isSelected = selectedImage === imageUrl;
-
-                return (
-                  <Image
-                    key={i}
-                    onClick={() => setSelectedImage(imageUrl)}
-                    className={`object-contain rounded-[16px]  border cursor-pointer w-[80px] h-[80px] lg:w-[100px] lg:h-[100px] ${
-                      isSelected
-                        ? "border-4 border-blue-600"
-                        : "border-green-300 hover:border-blue-400"
-                    }`}
-                    width={100}
-                    height={100}
-                    alt="photo"
-                    src={imageUrl}
-                  />
-                );
-              })}
-            </div>
-          )}
-
-          <Image
-            style={{ borderRadius: "16px" }}
-            className="rounded-[16px] w-full lg:w-[600px] h-[300px] lg:h-[500px] object-contain"
-            width={600}
-            height={500}
-            alt="photo"
-            src={
-              selectedImage
-                ? selectedImage
-                : `https://api.piknicuz.com/api/uploads/images/${product.image_src}`
-            }
-          />
-        </div>
-
-        <div className="p-2 flex flex-col justify-center">
-          <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
-
-          <div className="flex items-center gap-x-2 mb-2">
-            <Image src="/star.svg" width={18} height={18} alt="star" />
-            <Image src="/star.svg" width={18} height={18} alt="star" />
-            <Image src="/star.svg" width={18} height={18} alt="star" />
-            <Image src="/star.svg" width={18} height={18} alt="star" />
-            <Image src="/star.svg" width={18} height={18} alt="star" />
-
-            <p className="mb-0 text-sm">5.0/5</p>
-          </div>
-
-          <p className="text-2xl text-green-600 font-semibold mb-2">
-            {Number(product.price).toLocaleString()} UZS
-          </p>
-
-          {product.category && (
-            <p className="text-md text-gray-500 mb-2">
-              Kategoriya:{" "}
-              <span className="font-medium text-gray-800">
-                {product.category.name}
-              </span>
-            </p>
-          )}
-
-          <div
-            className="prose max-w-full mt-4"
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          />
-
-          <div className="flex flex-col lg:flex-row items-center gap-4 mt-6 mb-5">
-            <div className="flex gap-x-4 items-center">
-              <button
-                onClick={handleDecrement}
-                className="w-10 h-10 bg-gray-200 rounded hover:bg-gray-300 text-xl"
-              >
-                -
-              </button>
-              <input
-                type="number"
-                value={quantity}
-                disabled
-                className="w-16 text-center border rounded py-2"
-              />
-              <button
-                onClick={handleIncrement}
-                className="w-10 h-10 bg-gray-200 rounded hover:bg-gray-300 text-xl"
-              >
-                +
-              </button>
-            </div>
-            <button
-              onClick={() => addToCart(product)}
-              style={{
-                backgroundColor: "rgba(36, 93, 48, 1)",
-                borderRadius: "62px",
-              }}
-              className="text-white font-semibold px-6 py-3 w-full lg:w-[300px]"
-            >
-              Add to Cart
-            </button>
-          </div>
-        </div>
+    <div className="max-w-[1440px] mx-auto lg:pt-20 lg:pb-20 lg:pl-10">
+      <div className="flex items-center justify-center">
+        <p className="lg:text-[50px] font-normal">
+          Kategoriyalar va Maxsulotlar
+        </p>
       </div>
 
-      {/* Video */}
-      {product.video_src && (
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-4">Mahsulot Videosi</h2>
-          <video
-            controls
-            src={`https://api.piknicuz.com/api/uploads/videos/${product.video_src}`}
-            className="w-full rounded-lg"
-          />
-        </div>
-      )}
+      <div className="flex items-center px-8 lg:px-0 gap-x-3 overflow-x-scroll scroll-hidden">
+        {categories.map((cat: Category) => (
+          <div
+            key={cat.id}
+            onClick={() => Davron(cat.id)}
+            className={`gap-x-2 items-center cursor-pointer min-w-[200px] ${
+              kategoriya === cat.id ? "text-blue-500" : ""
+            }`}
+          >
+            <Image
+              className="lg:w-[70px] lg:h-[70px]"
+              width={70}
+              height={70}
+              alt="photo"
+              src={`https://api.piknicuz.com/api/uploads/images/${cat.image_src}`}
+            />
+            <p>{cat.name}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="max-w-[1540px] mx-auto transition-all duration-700 px-12 lg:px-0 ease-in-out gap-y-10 grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2">
+        {filteredProducts.map((pro) => (
+          <div
+            className="border rounded-[20px] mt-4 p-3 w-[300px] h-[450px]"
+            key={pro.id}
+          >
+            <Link href={`details/${pro.id}`}>
+              <Image
+                className="rounded-[30px] w-[300px] h-[300px] cursor-pointer"
+                style={{ backgroundColor: "#e8f8ed" }}
+                width={300}
+                height={300}
+                alt={pro.title}
+                src={`https://api.piknicuz.com/api/uploads/images/${pro.image_src}`}
+              />
+            </Link>
+            <p className="font-semibold">{pro.title}</p>
+            <div className="flex gap-x-2 items-center">
+              {[...Array(5)].map((_, i) => (
+                <Image
+                  key={i}
+                  src="/star.svg"
+                  width={18}
+                  height={18}
+                  alt="star"
+                />
+              ))}
+              <p className="mb-0">5.0/5</p>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-[25px] mb-0 font-semibold">{pro.price}</p>
+              <MdOutlineAddShoppingCart
+                className="cursor-pointer"
+                onClick={() => addToCart(pro)}
+                size={30}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default ProductDetailClient;
+}
