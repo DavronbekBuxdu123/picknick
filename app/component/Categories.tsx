@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import useProductStore from "../store/useProductStore";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function Categories() {
@@ -13,23 +12,20 @@ export default function Categories() {
     categories,
     fetchCategories,
     addToCart,
-    carts,
     search,
   } = useProductStore();
   const [kategoriya, setKategoriya] = useState(null);
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
   console.log(search);
 
   const [open, setOpen] = useState(true);
-  const router = useRouter();
-  const pathname = usePathname();
 
   const filteredProducts = products.filter((pro) => {
     const matchesCategory = kategoriya ? pro.category_id === kategoriya : true;

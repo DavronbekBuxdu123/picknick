@@ -21,11 +21,11 @@ export default function Maxsulotlar() {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
 
   const filteredProducts = products.filter((pro) => {
     const matchesCategory = kategoriya ? pro.category_id === kategoriya : true;

@@ -12,15 +12,7 @@ const ProductDetailClient = () => {
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
-  const {
-    products,
-    fetchProducts,
-    categories,
-    fetchCategories,
-    addToCart,
-    carts,
-    search,
-  } = useProductStore();
+  const { products, fetchProducts, addToCart } = useProductStore();
 
   useEffect(() => {
     const loadProduct = async () => {
