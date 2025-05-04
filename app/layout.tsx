@@ -21,14 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [loading, setLoading] = useState(false);
-  const pathname = usePathname(); // Use `usePathname` to track the route changes
+  const pathname = usePathname();
 
-  // Sahifa o'zgarishini kuzatib borish
   useEffect(() => {
-    setLoading(true); // Sahifa yuklana boshlaydi
-    const timer = setTimeout(() => setLoading(false), 1000); // 1 soniya kutish va loadingni o'chirish
-    return () => clearTimeout(timer); // Cleanup function
-  }, [pathname]); // `pathname` o'zgarishi bilan yuklashni boshla
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 300);
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   return (
     <html lang="en">

@@ -91,13 +91,13 @@ export default function Categories() {
       </div>
 
       <div
-        className={`max-w-[1540px] mx-auto transition-all duration-700 px-12 lg:px-0 ease-in-out gap-y-10 h-[1530px] ${
+        className={`max-w-[1540px] mx-auto transition-all duration-700  lg:px-0 ease-in-out gap-y-10 h-[1530px] ${
           open ? "overflow-hidden" : "h-auto"
         } grid lg:grid-cols-4 sm:grid-cols-1 md:grid-cols-2`}
       >
         {filteredProducts.map((pro) => (
           <div
-            className="border rounded-[20px] mt-4 p-3 w-[300px] h-[450px]"
+            className="border rounded-[20px] ml-5 lg:ml-0 mt-4 p-3 w-[300px] h-[450px]"
             key={pro.id}
           >
             <Link href={`details/${pro.id}`}>
