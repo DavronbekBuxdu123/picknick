@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="">
       <body className={` antialiased ${montserrat.className}`}>
-        <div className="w-full">
+        <div className="max-w-full w-full">
           <Header />
 
           <main className="">

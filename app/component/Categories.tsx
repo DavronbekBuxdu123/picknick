@@ -62,7 +62,7 @@ export default function Categories() {
   };
 
   return (
-    <div className="max-w-[1440px] mx-auto pt-20">
+    <div className="max-w-[1440px] container mx-auto pt-20">
       <div className="flex items-center justify-center">
         <p className="lg:text-[50px] font-normal">
           Kategoriyalar va Maxsulotlar

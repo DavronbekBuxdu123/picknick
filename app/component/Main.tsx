@@ -3,8 +3,8 @@ import React from "react";
 
 export default function Main() {
   return (
-    <div className="flex flex-col  lg:flex-row items-center lg:justify-between p-4 sm:p-8 lg:p-[100px] gap-8">
-      <div className="max-w-full lg:max-w-[596px] text-center lg:text-left">
+    <div className="container mx-auto flex flex-col lg:flex-row items-center lg:justify-between px-4 sm:px-8 lg:px-10 py-8 gap-8 max-w-[1440px] ">
+      <div className=" lg:max-w-[596px] text-center lg:text-left">
         <div className="max-w-[450px]  lg:text-left">
           <p
             style={{ lineHeight: "50px", color: "rgba(0, 0, 0, 1)" }}

@@ -15,7 +15,7 @@ export default function Header() {
   const [text, setText] = useState(true);
 
   return (
-    <div className="mx-auto w-full border">
+    <div className="mx-auto w-full">
       <div
         style={{ backgroundColor: "rgba(36, 93, 48, 1)" }}
         className={`h-auto w-full relative mx-auto text-white text-center text-[14px] font-normal p-2 px-3 flex fle-col justify-center ${
@@ -32,7 +32,7 @@ export default function Header() {
         </p>
       </div>
       <div className="w-full mx-auto relative">
-        <div className="flex items-center container mx-auto justify-between px-4 lg:px-[100px] pt-[20px]">
+        <div className="flex items-center w-full max-w-[1440px] mx-auto justify-between px-4 sm:px-6 lg:px-10 pt-[20px]">
           <div>
             <Link href="/">
               <Image
@@ -105,7 +105,6 @@ export default function Header() {
               />
             </div>
 
-            {/* Sidebar */}
             {open && (
               <>
                 <div
@@ -135,7 +134,6 @@ export default function Header() {
             )}
           </div>
 
-          {/* Desktop Search and Cart */}
           <div className="relative hidden lg:flex items-center gap-x-5">
             <CiSearch className="absolute top-2 left-2 size-6" />
             <input
