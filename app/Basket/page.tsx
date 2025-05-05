@@ -64,7 +64,7 @@ export default function CartPage() {
       {carts.length === 0 ? (
         <div className="max-w-[1240px] mx-auto w-full h-[200px]  px-[16px] sm:px-0 mt-[40px] ">
           <h1 className="text-[36px] sm:text-left text-center font-bold text-black mt-[50px] sm:mt-[32px]">
-            Sizning savatingiz bo'sh
+            Sizning savatingiz bo`sh
           </h1>
         </div>
       ) : (
