@@ -31,7 +31,7 @@ export default function Header() {
           X
         </p>
       </div>
-      <div className="w-full mx-auto relative">
+      <div className="w-full container mx-auto relative">
         <div className="flex items-center w-full max-w-[1440px] mx-auto justify-between px-4 sm:px-6 lg:px-10 pt-[20px]">
           <div>
             <Link href="/">
