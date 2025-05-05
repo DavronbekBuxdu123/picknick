@@ -1,14 +1,16 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import useProductStore from "@/app/store/useProductStore";
+import useProductStore, { Product } from "@/app/store/useProductStore";
 import Image from "next/image";
+interface ProductImage {
+  images_src: string;
+}
 
 const ProductDetailClient = () => {
   const { id } = useParams();
 
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
@@ -25,7 +27,8 @@ const ProductDetailClient = () => {
 
   useEffect(() => {
     if (products.length > 0 && id) {
-      const foundProduct = products.find((item) => item.id.toString() === id);
+      const foundProduct =
+        products.find((item) => item.id === Number(id)) || null;
       setProduct(foundProduct);
       setLoading(false);
     }
@@ -46,7 +49,7 @@ const ProductDetailClient = () => {
         <div className="flex flex-col lg:flex-row gap-4">
           {product.product_images?.length > 0 && (
             <div className="flex lg:flex-col gap-2 max-h-[500px] overflow-y-auto scroll-hidden pr-2">
-              {product.product_images.map((img: any, i: number) => {
+              {product.product_images.map((img: ProductImage, i: number) => {
                 const imageUrl = `https://api.piknicuz.com/api/uploads/images/${img.images_src}`;
                 const isSelected = selectedImage === imageUrl;
 

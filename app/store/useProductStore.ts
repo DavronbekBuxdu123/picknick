@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-interface Product {
+export interface Product {
   category: { id: number; name: string };
   video_src: string;
   product_images: never[];
