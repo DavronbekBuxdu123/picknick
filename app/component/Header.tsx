@@ -14,148 +14,133 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState(true);
 
+  const links = [
+    { href: "/", label: "Bosh sahifa" },
+    { href: "/Maxsulotlar", label: "Mahsulotlar" },
+    { href: "/Contactt", label: "Aloqa" },
+    { href: "/Blog", label: "Blog" },
+  ];
+
   return (
-    <div className="mx-auto w-full">
-      <div
-        style={{ backgroundColor: "rgba(36, 93, 48, 1)" }}
-        className={`h-auto w-full relative mx-auto text-white text-center text-[14px] font-normal p-2 px-3 flex fle-col justify-center ${
-          text ? "flex" : "hidden"
-        }`}
-      >
-        Sign up and get 20% off to your first order. Sign Up Now
-        <p
-          onClick={() => setText(!text)}
-          className="absolute  cursor-pointer top-2 right-10"
+    <div className="w-full">
+      {text && (
+        <div
+          style={{ backgroundColor: "rgba(36, 93, 48, 1)" }}
+          className="text-white text-center text-xs lg:text-sm font-normal py-2 px-3 relative flex justify-center items-center"
         >
-          {" "}
-          X
-        </p>
-      </div>
-      <div className="w-full container mx-auto relative">
-        <div className="flex items-center w-full max-w-[1440px] mx-auto justify-between px-4 sm:px-6 lg:px-10 pt-[20px]">
-          <div>
-            <Link href="/">
-              <Image
-                className="lg:w-[60px] lg:h-[60px] w-[45px] h-[45px]"
-                src="/logo.svg"
-                width={45}
-                height={45}
-                alt="logo"
-              />
-            </Link>
-          </div>
-          <div className="lg:block hidden ml-20">
-            <ul className="flex gap-[35px]">
-              <Link
-                style={{ textDecoration: "none" }}
-                className={`no-underline ${
-                  pathname === "/" ? "text-success" : "text-dark"
-                }`}
-                href="/"
-              >
-                <li>Bosh sahifa</li>
-              </Link>
-              <Link
-                style={{ textDecoration: "none" }}
-                className={`no-underline ${
-                  pathname === "/Maxsulotlar" ? "text-success" : "text-dark"
-                }`}
-                href="/Maxsulotlar"
-              >
-                <li>Mahsulotlar</li>
-              </Link>
-              <Link
-                style={{ textDecoration: "none" }}
-                className={`no-underline ${
-                  pathname === "/Contactt" ? "text-success" : "text-dark"
-                }`}
-                href="/Contactt"
-              >
-                <li>Aloqa</li>
-              </Link>
-              <Link
-                style={{ textDecoration: "none" }}
-                className={`no-underline ${
-                  pathname === "/Blog" ? "text-success" : "text-dark"
-                }`}
-                href="/Blog"
-              >
-                <li>Blog</li>
-              </Link>
-            </ul>
-          </div>
-          <div className="relative ">
-            <div className="flex items-center gap-x-4 lg:hidden px-4 py-2">
-              <CiSearch className="absolute top-4 left-8 size-6" />
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{ backgroundColor: "rgba(240, 240, 240, 1)" }}
-                type="search"
-                placeholder="Search for products..."
-                className="placeholder:text-[12px] placeholder:ml-[20px] h-[38px] max-w-[278px] rounded-[68px] pt-[8px] pb-[8px] pl-[36px] pr-[16px]"
-              />
-              <Link className="text-dark cursor-pointer" href="/Basket">
-                <MdAddShoppingCart className="cursor-pointer" size={24} />
-              </Link>
-              <IoReorderThreeOutline
-                onClick={() => setOpen(!open)}
-                className="cursor-pointer"
-                size={24}
-              />
-            </div>
+          Sign up and get 20% off to your first order. Sign Up Now
+          <button
+            onClick={() => setText(false)}
+            className="absolute top-1 right-4 text-2xl font-bold"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
-            {open && (
-              <>
-                <div
-                  className="fixed inset-0 bg-black opacity-40 z-40"
-                  onClick={() => setOpen(false)}
-                />
-                <div className="fixed top-0 right-0 z-50 w-[250px] h-screen bg-white border-l shadow-lg p-4">
-                  <button onClick={() => setOpen(false)} className="mb-4">
-                    Yopish
-                  </button>
-                  <ul className="space-y-4">
-                    <li>
-                      <Link href="/">Bosh sahifa</Link>
-                    </li>
-                    <li>
-                      <Link href="/Maxsulotlar">Mahsulotlar</Link>
-                    </li>
-                    <li>
-                      <Link href="/Contactt">Aloqa</Link>
-                    </li>
-                    <li>
-                      <Link href="/Blog">Blog</Link>
-                    </li>
-                  </ul>
-                </div>
-              </>
-            )}
-          </div>
+      <header className="container mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-10 py-4 flex justify-between items-center relative">
+        <Link href="/">
+          <Image
+            src="/logo.svg"
+            alt="logo"
+            width={60}
+            height={60}
+            className="w-[45px] h-[45px] lg:w-[60px] lg:h-[60px] no-underline"
+          />
+        </Link>
 
-          <div className="relative hidden lg:flex items-center gap-x-5">
-            <CiSearch className="absolute top-2 left-2 size-6" />
+        <nav className="hidden lg:flex items-center gap-10">
+          <ul className="flex gap-8">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  style={{ textDecoration: "no-underline" }}
+                  href={link.href}
+                  className={`no-underline ${
+                    pathname === link.href ? "text-success" : "text-dark"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="hidden lg:flex items-center gap-5 relative">
+          <div className="relative">
+            <CiSearch className="absolute top-2 left-3 size-5" />
             <input
+              type="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              style={{ backgroundColor: "rgba(240, 240, 240, 1)" }}
-              type="search"
               placeholder="Search for products..."
-              className="placeholder:text-[12px] placeholder:ml-[20px] h-[38px] max-w-[278px] rounded-[68px] pt-[8px] pb-[8px] pl-[36px] pr-[16px]"
+              className="pl-10 pr-4 py-2 text-sm rounded-full bg-gray-100"
             />
-            <Link href="/Basket">
-              <MdAddShoppingCart
-                className="cursor-pointer text-dark"
-                size={24}
-              />
-            </Link>
-            <div className="bg-green-600 w-[17px] h-[17px] rounded-full flex items-center justify-center text-white absolute top-0 -right-3">
-              {carts.length}
-            </div>
           </div>
+          <Link href="/Basket" className="relative">
+            <MdAddShoppingCart size={24} className="text-dark" />
+            {carts.length > 0 && (
+              <span className="absolute -top-3 -right-3 bg-green-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {carts.length}
+              </span>
+            )}
+          </Link>
         </div>
-      </div>
+
+        <div className="lg:hidden flex items-center gap-4">
+          <div className="relative">
+            <CiSearch className="absolute top-2 left-3 size-5" />
+            <input
+              type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search for products..."
+              className="pl-10 pr-4 py-2 text-sm rounded-full bg-gray-100"
+            />
+          </div>
+          <Link href="/Basket" className="relative">
+            <MdAddShoppingCart size={24} className="text-dark" />
+            {carts.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {carts.length}
+              </span>
+            )}
+          </Link>
+          <button onClick={() => setOpen(true)}>
+            <IoReorderThreeOutline size={24} className="text-dark" />
+          </button>
+        </div>
+
+        {open && (
+          <>
+            <div
+              className="fixed inset-0 bg-black opacity-40 z-40"
+              onClick={() => setOpen(false)}
+            />
+            <div className="fixed top-0 right-0 z-50 w-64 h-1/3 rounded-l-2xl bg-white shadow-lg p-6">
+              <button onClick={() => setOpen(false)} className="mb-6 ">
+                Yopish
+              </button>
+              <ul className="space-y-4 ">
+                {links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className={`block no-underline ${
+                        pathname === link.href ? "text-success" : "text-dark"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+      </header>
     </div>
   );
 }

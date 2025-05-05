@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function Main() {
@@ -23,16 +24,12 @@ export default function Main() {
           anjomlarigacha, hammasi sizning tajribangizni yuksaltirish uchun.
         </p>
 
-        <div className=" flex items-center justify-center lg:justify-start">
-          <button
-            style={{
-              backgroundColor: "rgba(36, 93, 48, 1)",
-              borderRadius: "62px",
-            }}
-            className="lg:w-[210px] lg:h-[40px] sm:w-70    flex items-center justify-center rounded-[62px] pt-[16px] pb-[16px] pr-[54px] pl-[54px] text-white "
-          >
-            Xarid qiling
-          </button>
+        <div className=" flex items-center justify-center lg:justify-start group">
+          <Link href="/Maxsulotlar">
+            <button className="lg:w-[210px] lg:h-[40px] btn btn-success sm:w-70 bg-green-900   group-hover:  flex items-center justify-center rounded-[62px] pt-[16px] pb-[16px] pr-[54px] pl-[54px] text-white ">
+              Xarid qiling
+            </button>
+          </Link>
         </div>
 
         <div className="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-full justify-items-center lg:justify-items-start">

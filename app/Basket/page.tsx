@@ -6,6 +6,7 @@ import { FaArrowRight, FaMinus, FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import useProductStore from "../store/useProductStore";
 import Modal from "../component/Modal";
+import { toast } from "react-toastify";
 
 const IMAG_URL_PIKNIK = "https://api.piknicuz.com/api/uploads/images/";
 
@@ -23,7 +24,7 @@ export default function CartPage() {
   const handleSubmit = () => {
     setIsModalOpen(false);
     clearCart();
-    alert("Xaridingiz uchun rahmat!");
+    toast.success("Xaridingiz uchun rahmat!");
   };
 
   return (
@@ -87,12 +88,15 @@ export default function CartPage() {
                     />
                     <div className="max-w-[527px] w-full h-[82px] sm:h-[124px] flex justify-between items-center">
                       <div className="max-w-[71px] h-[60px] sm:h-[118px] w-full flex flex-col justify-between">
-                        <p className="text-[20px] font-bold text-[#000000]">
+                        <p className="lg:text-[20px] text-[12px] font-bold text-[#000000]">
                           {item.product.title}
                         </p>
-                        <h1 className="text-[24px] font-bold text-[#000000]">
-                          ${item.product.price}
-                        </h1>
+                        <p className="lg:text-[24px] text-[12px] font-bold text-[#000000]">
+                          {item.product.price
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          <span className="ml-2">UZS</span>
+                        </p>
                       </div>
                       <div className="max-w-[255px] w-full h-[82px] sm:h-[124px] flex flex-col justify-between items-end">
                         <button
@@ -126,7 +130,6 @@ export default function CartPage() {
               ))}
             </div>
 
-            {/* Buyurtma xulosasi */}
             <div className="max-w-[505px] w-full mb-[104px] sm:h-[406px] h-[444px] sm:mb-0 border border-[#0000001A] rounded-[20px] px-[16px] py-[24px] sm:py-[30px] sm:px-[24px]">
               <h1 className="font-bold text-black text-[20px] sm:text-[24px]">
                 Buyurtma xulosasi
@@ -137,7 +140,10 @@ export default function CartPage() {
                     Oraliq jami
                   </p>
                   <p className="text-[14px] sm:text-[20px] text-black font-semibold">
-                    ${UmumumiyPul()}
+                    {UmumumiyPul()
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    <span className="ml-2">UZS</span>
                   </p>
                 </div>
                 <div className="flex justify-between">
@@ -145,7 +151,12 @@ export default function CartPage() {
                     Chegirma (-20%)
                   </p>
                   <p className="text-[14px] sm:text-[20px] text-[#FF3333] font-semibold">
-                    -${(UmumumiyPul() * 0.2).toFixed(2)}
+                    -
+                    {(UmumumiyPul() * 0.2)
+                      .toFixed(2)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    <span className="ml-2">UZS</span>
                   </p>
                 </div>
                 <hr />
@@ -154,7 +165,11 @@ export default function CartPage() {
                     Umumiy
                   </p>
                   <p className="text-[20px] sm:text-[24px] text-black font-semibold">
-                    ${(UmumumiyPul() * 0.8).toFixed(2)}
+                    {(UmumumiyPul() * 0.8)
+                      .toFixed(2)
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    <span className="ml-2">UZS</span>
                   </p>
                 </div>
               </div>

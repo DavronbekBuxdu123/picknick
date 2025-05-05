@@ -20,7 +20,7 @@ export function Carusel() {
         className="max-w-[1540px] mx-auto mt-[100px] lg:mt-[200px] text-center  "
       >
         {" "}
-        <p className="text-[55px]  lg:text-left font-semibold ">
+        <p className="text-3xl lg:text-[55px]  lg:text-left font-semibold ">
           Bizning mamnun mijozlarimiz
         </p>
         <CarouselContent>

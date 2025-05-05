@@ -61,8 +61,10 @@ export default function Question() {
   ];
   return (
     <div className="max-w-[1440px] mx-auto mt-[50px] h-auto">
-      <p className="text-center text-[50px]">Tez-tez beriladigan savollar</p>
-      <div className="max-w-xl mx-auto">
+      <p className="text-center text-[24px] lg:text-[50px]">
+        Tez-tez beriladigan savollar
+      </p>
+      <div className="max-w-[900px] mx-auto">
         <Accordion type="single" collapsible className="space-y-4">
           {question.map((ques, ind) => (
             <AccordionItem

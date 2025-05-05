@@ -1,8 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 interface Product {
+  category: { id: number; name: string };
+  video_src: string;
+  product_images: never[];
+  description: string;
   category_id: number;
   id: number;
   title: string;
@@ -20,13 +25,13 @@ interface Category {
   name: string;
   image_src: string;
 }
-
 interface ProductStore {
   products: Product[];
   categories: Category[];
   DetailsId: string;
   carts: CartItem[];
   search: string;
+  loading: boolean; // loading holati qo'shildi
   setSearch: (text: string) => void;
   addToCart: (item: Product) => void;
   removeFromCart: (id: number) => void;
@@ -45,11 +50,13 @@ const useProductStore = create<ProductStore>()(
       DetailsId: "",
       carts: [],
       search: "",
+      loading: false,
+
       clearCart: () => set({ carts: [] }),
 
       setSearch: (text) => set(() => ({ search: text })),
 
-      addToCart: (item) =>
+      addToCart: (item) => {
         set((state) => {
           const existing = state.carts.find((i) => i.product.id === item.id);
           if (existing) {
@@ -67,7 +74,9 @@ const useProductStore = create<ProductStore>()(
               { id: item.id, product: item, quantity: 1 },
             ],
           };
-        }),
+        });
+        toast.success("Maxsulot savatga qo'shildi");
+      },
 
       removeFromCart: (id) =>
         set((state) => ({
@@ -91,15 +100,19 @@ const useProductStore = create<ProductStore>()(
       setDetailsId: (id) => set(() => ({ DetailsId: id })),
 
       fetchProducts: async () => {
+        set({ loading: true });
         try {
           const res = await axios.get("https://api.piknicuz.com/api/products");
           set(() => ({ products: res.data.data }));
         } catch (err) {
           console.log(err);
+        } finally {
+          set({ loading: false });
         }
       },
 
       fetchCategories: async () => {
+        set({ loading: true });
         try {
           const res = await axios.get(
             "https://api.piknicuz.com/api/categories"
@@ -107,6 +120,8 @@ const useProductStore = create<ProductStore>()(
           set(() => ({ categories: res.data.data }));
         } catch (err) {
           console.log(err);
+        } finally {
+          set({ loading: false });
         }
       },
     }),

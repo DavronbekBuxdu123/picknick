@@ -11,11 +11,11 @@ export default function Contact() {
     toast.success("Tez orada siz bilan bog'lanamiz");
   };
   return (
-    <div className="max-w-[1440px] mx-auto lg:p-[100px] lg:flex lg:mt-[0] mt-[30px] ">
+    <div className="container  mx-auto lg:p-[100px] lg:flex lg:mt-[0] mt-[30px] pb-6">
       <div>
         {" "}
         <ToastContainer />
-        <div className="max-w-[570px] text-left px-2 text-[25px]">
+        <div className="max-w-[570px]  text-left px-2 text-[25px]">
           <p
             className="lg:text-[50px] lg:text-left "
             style={{ color: "rgba(1, 19, 52, 1)" }}
@@ -49,13 +49,15 @@ export default function Contact() {
           </div>
         </div>
       </div>
-      <div className="space-y-[20px] border rounded-[30px] p-6 lg:mt-0 mt-[50px]">
+      <div className="space-y-[20px] border max-w-[500px] lg:w-[500px]  rounded-[15px] p-6 lg:mt-0 mt-[50px]">
         <div className="lg:flex sm:block gap-y-7 gap-x-2 sm:gap-x-4 max-w-[565px]">
           <input type="text" placeholder="name..." className="form-control" />
+        </div>
+        <div>
           <input
             type="text"
             placeholder="lastname..."
-            className="form-control lg:mt-[0]"
+            className="form-control "
           />
         </div>
 
