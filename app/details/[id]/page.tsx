@@ -26,6 +26,7 @@ const ProductDetailClient = () => {
   }, [fetchProducts, products.length]);
 
   useEffect(() => {
+    console.log(id);
     if (products.length > 0 && id) {
       const foundProduct =
         products.find((item) => item.id === Number(id)) || null;

@@ -31,7 +31,7 @@ interface ProductStore {
   DetailsId: string;
   carts: CartItem[];
   search: string;
-  loading: boolean; // loading holati qo'shildi
+  loading: boolean; 
   setSearch: (text: string) => void;
   addToCart: (item: Product) => void;
   removeFromCart: (id: number) => void;

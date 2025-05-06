@@ -41,7 +41,7 @@ export default function RootLayout({
         <title>Picnic Site</title>
       </head>
       <body className={`antialiased ${montserrat.className}`}>
-        <div className="max-w-full w-full">
+        <div className=" w-full">
           <Header />
           <main>
             {children}
